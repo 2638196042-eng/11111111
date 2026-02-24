@@ -93,12 +93,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen pb-24 font-sans max-w-3xl mx-auto bg-slate-50">
+    <div className="min-h-screen pb-24 font-sans max-w-3xl mx-auto bg-blue-50">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-md sticky top-0 z-10 border-b border-teal-100 shadow-sm px-6 py-4 flex items-center justify-between">
+      <header className="bg-white/80 backdrop-blur-md sticky top-0 z-10 border-b border-blue-100 shadow-sm px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="bg-teal-100 p-2 rounded-xl">
-            <Star className="text-teal-500 w-6 h-6 fill-teal-500" />
+          <div className="bg-blue-100 p-2 rounded-xl">
+            <Star className="text-blue-500 w-6 h-6 fill-blue-500" />
           </div>
           {isEditingName ? (
             <input
@@ -108,22 +108,22 @@ export default function App() {
               onBlur={() => setIsEditingName(false)}
               onKeyDown={(e) => e.key === 'Enter' && setIsEditingName(false)}
               autoFocus
-              className="text-2xl font-bold text-teal-600 tracking-wide bg-transparent border-b-2 border-teal-300 focus:outline-none w-40"
+              className="text-2xl font-bold text-blue-600 tracking-wide bg-transparent border-b-2 border-blue-300 focus:outline-none w-40"
               style={{ fontFamily: '"ZCOOL KuaiLe", sans-serif' }}
             />
           ) : (
             <h1 
-              className="text-2xl font-bold text-teal-600 tracking-wide cursor-pointer hover:opacity-80 flex items-center gap-1" 
+              className="text-2xl font-bold text-blue-600 tracking-wide cursor-pointer hover:opacity-80 flex items-center gap-1" 
               style={{ fontFamily: '"ZCOOL KuaiLe", sans-serif' }}
               onClick={() => setIsEditingName(true)}
               title="点击修改名称"
             >
               {appName}
-              <Edit2 className="w-4 h-4 text-teal-300 inline-block" />
+              <Edit2 className="w-4 h-4 text-blue-300 inline-block" />
             </h1>
           )}
         </div>
-        <div className="text-sm font-bold text-teal-400 bg-teal-50 px-3 py-1 rounded-full">
+        <div className="text-sm font-bold text-blue-400 bg-blue-50 px-3 py-1 rounded-full">
           {stats.percentage}% 完成
         </div>
       </header>
@@ -151,7 +151,7 @@ export default function App() {
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-teal-100 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] pb-safe">
+      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-blue-100 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] pb-safe">
         <div className="max-w-3xl mx-auto flex justify-around p-2">
           <NavButton 
             active={activeTab === 'dashboard'} 
@@ -183,7 +183,7 @@ function NavButton({ active, onClick, icon, label }: { active: boolean, onClick:
       onClick={onClick}
       className={cn(
         "flex flex-col items-center justify-center w-20 py-2 rounded-2xl transition-all duration-300",
-        active ? "text-teal-600 bg-teal-50 scale-105" : "text-gray-400 hover:text-teal-400 hover:bg-teal-50/50"
+        active ? "text-blue-600 bg-blue-50 scale-105" : "text-gray-400 hover:text-blue-400 hover:bg-blue-50/50"
       )}
     >
       <div className={cn("mb-1 transition-transform duration-300", active && "transform -translate-y-1")}>
@@ -202,9 +202,9 @@ function DashboardView({ stats }: { key?: React.Key, stats: { total: number, lea
       exit={{ opacity: 0, y: -20 }}
       className="space-y-6"
     >
-      <div className="bg-white rounded-3xl p-6 shadow-sm border border-teal-50 relative overflow-hidden">
-        <div className="absolute -right-6 -top-6 w-32 h-32 bg-teal-50 rounded-full opacity-50" />
-        <div className="absolute -left-6 -bottom-6 w-24 h-24 bg-blue-50 rounded-full opacity-50" />
+      <div className="bg-white rounded-3xl p-6 shadow-sm border border-blue-50 relative overflow-hidden">
+        <div className="absolute -right-6 -top-6 w-32 h-32 bg-blue-50 rounded-full opacity-50" />
+        <div className="absolute -left-6 -bottom-6 w-24 h-24 bg-cyan-50 rounded-full opacity-50" />
         
         <div className="relative z-10">
           <h2 className="text-xl font-bold text-gray-800 mb-2 flex items-center gap-2">
@@ -213,7 +213,7 @@ function DashboardView({ stats }: { key?: React.Key, stats: { total: number, lea
           </h2>
           
           <div className="mt-6 mb-2 flex justify-between items-end">
-            <span className="text-4xl font-black text-teal-500">{stats.percentage}<span className="text-2xl">%</span></span>
+            <span className="text-4xl font-black text-blue-500">{stats.percentage}<span className="text-2xl">%</span></span>
             <span className="text-sm text-gray-500 font-medium">加油鸭！🦆</span>
           </div>
           
@@ -222,7 +222,7 @@ function DashboardView({ stats }: { key?: React.Key, stats: { total: number, lea
               initial={{ width: 0 }}
               animate={{ width: `${stats.percentage}%` }}
               transition={{ duration: 1, ease: "easeOut" }}
-              className="h-full bg-gradient-to-r from-teal-300 to-teal-500 rounded-full"
+              className="h-full bg-gradient-to-r from-blue-300 to-blue-500 rounded-full"
             />
           </div>
         </div>
@@ -247,7 +247,7 @@ function DashboardView({ stats }: { key?: React.Key, stats: { total: number, lea
         />
       </div>
       
-      <div className="bg-white rounded-3xl p-6 shadow-sm border border-teal-50 text-center">
+      <div className="bg-white rounded-3xl p-6 shadow-sm border border-blue-50 text-center">
         <img src="https://picsum.photos/seed/cute/400/200?blur=2" alt="Cute placeholder" className="w-full h-32 object-cover rounded-2xl mb-4 opacity-80" referrerPolicy="no-referrer" />
         <p className="text-gray-600 font-medium">
           {stats.percentage === 100 
@@ -287,7 +287,7 @@ function CatalogView({ learnedTopics, toggleTopic, toggleChapter }: {
       exit={{ opacity: 0, y: -20 }}
       className="space-y-6"
     >
-      <div className="bg-white rounded-3xl p-4 shadow-sm border border-teal-50 mb-4">
+      <div className="bg-white rounded-3xl p-4 shadow-sm border border-blue-50 mb-4">
         <p className="text-sm text-gray-500 text-center font-medium">
           家长可以在这里勾选孩子已经掌握的知识点哦~ 👇
         </p>
@@ -295,7 +295,7 @@ function CatalogView({ learnedTopics, toggleTopic, toggleChapter }: {
 
       {catalogData.map((part, pIdx) => (
         <div key={pIdx} className="space-y-3">
-          <h2 className="text-lg font-bold text-teal-600 sticky top-[72px] bg-slate-50/90 backdrop-blur-sm py-2 z-10 rounded-lg px-2">
+          <h2 className="text-lg font-bold text-blue-600 sticky top-[72px] bg-blue-50/90 backdrop-blur-sm py-2 z-10 rounded-lg px-2">
             {part.part}
           </h2>
           <div className="space-y-3">
@@ -336,9 +336,9 @@ function ChapterAccordion({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-teal-50 overflow-hidden">
+    <div className="bg-white rounded-2xl shadow-sm border border-blue-50 overflow-hidden">
       <div 
-        className="flex items-center justify-between p-4 cursor-pointer hover:bg-teal-50/30 transition-colors"
+        className="flex items-center justify-between p-4 cursor-pointer hover:bg-blue-50/30 transition-colors"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="flex items-center gap-3 flex-1">
@@ -438,18 +438,18 @@ function PlanView({ learnedTopics, downloadCSV }: { key?: React.Key, learnedTopi
       exit={{ opacity: 0, y: -20 }}
       className="space-y-6"
     >
-      <div className="bg-white rounded-3xl p-6 shadow-sm border border-teal-50 flex flex-col items-center text-center">
+      <div className="bg-white rounded-3xl p-6 shadow-sm border border-blue-50 flex flex-col items-center text-center">
         <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
           <Calendar className="w-8 h-8 text-blue-500" />
         </div>
         <h2 className="text-xl font-bold text-gray-800 mb-2">专属学习计划表</h2>
         <p className="text-sm text-gray-500 mb-6 font-medium">
-          系统已为您整理好还未学习的知识点，共有 <span className="text-teal-500 font-bold text-lg">{unlearnedList.length}</span> 个。
+          系统已为您整理好还未学习的知识点，共有 <span className="text-blue-500 font-bold text-lg">{unlearnedList.length}</span> 个。
           <br/>可以下载为表格，贴在书桌前哦！
         </p>
         <button 
           onClick={downloadCSV}
-          className="flex items-center gap-2 bg-gradient-to-r from-teal-400 to-teal-500 text-white px-6 py-3 rounded-full font-bold shadow-md hover:shadow-lg hover:scale-105 transition-all active:scale-95"
+          className="flex items-center gap-2 bg-gradient-to-r from-blue-400 to-blue-500 text-white px-6 py-3 rounded-full font-bold shadow-md hover:shadow-lg hover:scale-105 transition-all active:scale-95"
         >
           <Download className="w-5 h-5" />
           下载专属学习计划表
@@ -458,22 +458,22 @@ function PlanView({ learnedTopics, downloadCSV }: { key?: React.Key, learnedTopi
 
       <div className="space-y-4">
         <h3 className="font-bold text-gray-700 px-2 flex items-center gap-2">
-          <span className="w-1.5 h-4 bg-teal-400 rounded-full"></span>
+          <span className="w-1.5 h-4 bg-blue-400 rounded-full"></span>
           待学清单预览
         </h3>
         
         {unlearnedList.length === 0 ? (
-          <div className="bg-white rounded-3xl p-8 text-center border border-teal-50">
+          <div className="bg-white rounded-3xl p-8 text-center border border-blue-50">
             <div className="text-4xl mb-4">🌟</div>
             <p className="text-gray-500 font-bold">太棒啦！所有知识点都学完了！</p>
           </div>
         ) : (
-          <div className="bg-white rounded-3xl shadow-sm border border-teal-50 overflow-hidden">
+          <div className="bg-white rounded-3xl shadow-sm border border-blue-50 overflow-hidden">
             <div className="max-h-[500px] overflow-y-auto p-2 space-y-2">
               {unlearnedList.map((item, idx) => (
                 <div key={idx} className="p-3 bg-gray-50 rounded-xl border border-gray-100 flex flex-col gap-1">
                   <div className="flex items-center gap-2 text-xs text-gray-400 font-medium">
-                    <span className="bg-teal-50 text-teal-600 px-2 py-0.5 rounded-md">{item.part.split(' ')[0]}</span>
+                    <span className="bg-blue-50 text-blue-600 px-2 py-0.5 rounded-md">{item.part.split(' ')[0]}</span>
                     <span>{item.chapter}</span>
                   </div>
                   <div className="text-sm font-bold text-gray-700 pl-1">
