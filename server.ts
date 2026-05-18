@@ -9,7 +9,7 @@ const activeUsersPath = path.resolve("active_users.json");
 
 // Initialize files if they don't exist
 if (!fs.existsSync(keysPath)) {
-  fs.writeFileSync(keysPath, JSON.stringify(["TQX-8F9A", "TQX-2B3C"], null, 2));
+  fs.writeFileSync(keysPath, JSON.stringify(["TQX-8F9A", "TQX-2B3C", "06C2280E"], null, 2));
 }
 if (!fs.existsSync(activeUsersPath)) {
   fs.writeFileSync(activeUsersPath, JSON.stringify([], null, 2));
