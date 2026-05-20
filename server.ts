@@ -81,6 +81,11 @@ async function startServer() {
     return res.json({ valid: isValid });
   });
 
+  // Handle missing API routes separately
+  app.all("/api/*", (req, res) => {
+    res.status(404).json({ error: `API route not found: ${req.method} ${req.url}` });
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
