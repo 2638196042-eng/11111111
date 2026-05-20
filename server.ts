@@ -3,9 +3,24 @@ import { createServer as createViteServer } from "vite";
 import fs from "fs";
 import path from "path";
 import crypto from "crypto";
+import { fileURLToPath } from "url";
 
-const keysPath = path.resolve("keys.json");
-const activeUsersPath = path.resolve("active_users.json");
+console.log("SERVER.TS EXECUTING...");
+
+// For ESM (dev)
+const __filename = typeof __filename !== "undefined" ? __filename : fileURLToPath(import.meta.url);
+const __dirname_resolved = typeof __dirname !== "undefined" ? __dirname : path.dirname(__filename);
+
+const getRootPath = (fileName: string) => {
+  // If we are in dist/server.cjs, the root is one level up
+  if (path.basename(__dirname_resolved) === "dist") {
+    return path.resolve(__dirname_resolved, "..", fileName);
+  }
+  return path.resolve(process.cwd(), fileName);
+};
+
+const keysPath = getRootPath("keys.json");
+const activeUsersPath = getRootPath("active_users.json");
 
 // Initialize files if they don't exist
 if (!fs.existsSync(keysPath)) {
@@ -20,6 +35,17 @@ async function startServer() {
   const PORT = 3000;
 
   app.use(express.json());
+
+  // Request logging middleware
+  app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+    next();
+  });
+
+  // Health check
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
 
   // API Routes
   app.post("/api/activate", (req, res) => {
@@ -59,11 +85,27 @@ async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: "spa",
+      appType: "custom", // Changed from "spa" to "custom" to handle fallback manually
     });
     app.use(vite.middlewares);
+
+    app.use("*", async (req, res) => {
+      const url = req.originalUrl;
+      try {
+        let template = fs.readFileSync(path.resolve("index.html"), "utf-8");
+        template = await vite.transformIndexHtml(url, template);
+        res.status(200).set({ "Content-Type": "text/html" }).end(template);
+      } catch (e: any) {
+        vite.ssrFixStacktrace(e);
+        console.error(e);
+        res.status(500).end(e.message);
+      }
+    });
   } else {
     app.use(express.static("dist"));
+    app.get("*", (req, res) => {
+      res.sendFile(path.resolve("dist/index.html"));
+    });
   }
 
   app.listen(PORT, "0.0.0.0", () => {

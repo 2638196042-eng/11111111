@@ -1,5 +1,6 @@
 {
   "name": "宝贝学习计划",
   "description": "一个可爱的学习计划应用，帮助家长和孩子追踪学习进度，生成未学知识点计划表。",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
